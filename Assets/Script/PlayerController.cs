@@ -2,7 +2,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
-{
+{ public bool FacingLeft { get { return facingLeft; } set { facingLeft = value; } }
+    public static PlayerController Instance;
+    private bool facingLeft = false;
+
     [SerializeField] private float moveSpeed = 1f;
     private PlayController playerControl;
     private Vector2 movement;
@@ -12,13 +15,14 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer mySpriteRenderer;
     private void Awake()
     {
+        Instance = this;
         playerControl = new PlayController();
         rb = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
         mySpriteRenderer = GetComponent<SpriteRenderer>();
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private void OnEnable()
+   public void OnEnable()
     {
         playerControl.Enable();
     }
@@ -50,9 +54,11 @@ public class PlayerController : MonoBehaviour
         if(mousePos.x < playerScreenPoint.x)
         {
             mySpriteRenderer.flipX = true;
+            FacingLeft = true;
         }else
         {
             mySpriteRenderer.flipX = false;
+            FacingLeft = false; 
         }
     }
 }
