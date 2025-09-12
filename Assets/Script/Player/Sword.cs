@@ -1,4 +1,5 @@
- using UnityEngine;
+using System.Collections;
+using UnityEngine;
 
 public class Sword : MonoBehaviour
 {
@@ -11,8 +12,10 @@ public class Sword : MonoBehaviour
  
     [SerializeField] private GameObject slashAminPrefab;
     [SerializeField] private Transform slashAminSpawnPoint;
-    private GameObject slashAmin;
 
+    [SerializeField] private float swordAttackCD = 0.5f;
+    private GameObject slashAmin;
+    private bool attackButtonDown, isAttacking = false;
     private void Awake()
     {
      //   playerController = GetComponent<PlayerController>();
@@ -31,16 +34,34 @@ public class Sword : MonoBehaviour
     }
     void Start()
     {
-        playerControls.Combat.Attack.started += _ => Attack();
+        playerControls.Combat.Attack.started += _ => StartAttacking();
+        playerControls.Combat.Attack.canceled += _ => StopAttacking();
     }
-
+    private void StartAttacking()
+    {
+        attackButtonDown = true;
+    }
+    private void StopAttacking()
+    {
+        attackButtonDown = false;
+    }
     // Update is called once per frame
     private void Attack()
     {
-        myAnimator.SetTrigger("Attack");
-        weaponCollider.gameObject.SetActive(true);
-        slashAmin = Instantiate(slashAminPrefab, slashAminSpawnPoint.position, Quaternion.identity);
-        slashAmin.transform.parent = this.transform.parent; 
+         if(attackButtonDown && !isAttacking)
+        {
+            isAttacking = true;
+            myAnimator.SetTrigger("Attack");
+            weaponCollider.gameObject.SetActive(true);
+            slashAmin = Instantiate(slashAminPrefab, slashAminSpawnPoint.position, Quaternion.identity);
+            slashAmin.transform.parent = this.transform.parent;
+            StartCoroutine(AttackCDRoutine());
+        }
+    }
+    private IEnumerator AttackCDRoutine()
+    {
+        yield return new WaitForSeconds(swordAttackCD);
+        isAttacking = false;   
     }
     public void DoneAttackingAnimEvent()
     {
@@ -65,6 +86,7 @@ public class Sword : MonoBehaviour
     void Update()
     {
         MouseFollowWithOffSet();
+        Attack();
     }
     private void MouseFollowWithOffSet()
     {
