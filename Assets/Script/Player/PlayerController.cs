@@ -2,9 +2,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : SingleTon<PlayerController>
 { public bool FacingLeft { get { return facingLeft; } set { facingLeft = value; } }
-    public static PlayerController Instance;
+  // public static PlayerController Instance;
     private bool facingLeft = false;
     private bool isDashing = false; 
 
@@ -17,9 +17,9 @@ public class PlayerController : MonoBehaviour
 
     private Animator myAnimator;
     private SpriteRenderer mySpriteRenderer;
-    private void Awake()
+   protected override void Awake()
     {
-        Instance = this;
+        base.Awake();
         playerControl = new PlayController();
         rb = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
@@ -59,8 +59,11 @@ public class PlayerController : MonoBehaviour
     }
     private void OnDisable()
     {
-        playerControl.Combat.Dash.performed -= OnDashPerformed;
-        playerControl.Disable();
+        if (playerControl != null)
+        {
+            playerControl.Combat.Dash.performed -= OnDashPerformed;
+            playerControl.Disable();
+        }
     }
 
     private void OnDashPerformed(InputAction.CallbackContext context)
