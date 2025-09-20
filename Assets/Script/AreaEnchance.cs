@@ -10,6 +10,8 @@ public class AreaEnchance : MonoBehaviour
         if(transittionName == SceneManagement.Instance.SceneTransitionName)
         {
             PlayerController.Instance.transform.position = this.transform.position;
+            CameraController.Instance.SetPlayerCameraFollow();
+            UIFade.Instance.FadeToClear();
         }
     }
 
