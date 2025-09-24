@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ActiveWeapon : SingleTon<ActiveWeapon> 
@@ -5,6 +6,7 @@ public class ActiveWeapon : SingleTon<ActiveWeapon>
    // [SerializeField] private MonoBehaviour currentActiveWeapon;
    public MonoBehaviour CurrentActiveWeapon  { get; private set; }
     private PlayController playController;
+    private float timeBetweenAttack; 
     private bool attackButtonDown, isAttacking = false;
     protected override void Awake()
     {
@@ -20,6 +22,8 @@ public class ActiveWeapon : SingleTon<ActiveWeapon>
     {
         playController.Combat.Attack.started += _ => StartAttacking();
         playController.Combat.Attack.canceled += _ => StopAttacking();
+
+        AttackCooldown();
     }
 
     // Update is called once per frame
@@ -30,14 +34,29 @@ public class ActiveWeapon : SingleTon<ActiveWeapon>
     public void NewWeapon(MonoBehaviour newWeapon)
     {
         CurrentActiveWeapon = newWeapon;
+
+        AttackCooldown();
+        timeBetweenAttack = (CurrentActiveWeapon as IWeapon).GetWeaponInfo().weaponCooldown;
     }
     public void WeaponNull()
     {
         CurrentActiveWeapon = null;
     }
-    public void ToggleIsAttacking(bool Value)
+    //public void ToggleIsAttacking(bool Value)
+    //{
+    //    isAttacking = Value;
+    //}
+
+    private void AttackCooldown()
     {
-        isAttacking = Value;
+        isAttacking = true;
+        StopAllCoroutines();
+        StartCoroutine(TimeBetweenAttacksRoutine()); 
+    }
+  private  IEnumerator TimeBetweenAttacksRoutine()
+    {
+        yield return new WaitForSeconds(timeBetweenAttack);
+        isAttacking = false;
     }
     private void StartAttacking()
     {
@@ -51,7 +70,8 @@ public class ActiveWeapon : SingleTon<ActiveWeapon>
     {
         if (attackButtonDown && !isAttacking)
         {
-            isAttacking = true;
+            //   isAttacking = true;
+            AttackCooldown();
             (CurrentActiveWeapon as IWeapon).Attack();
         }
         

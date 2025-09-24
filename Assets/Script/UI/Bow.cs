@@ -1,11 +1,16 @@
 using UnityEngine;
 
-public class Staff : MonoBehaviour, IWeapon
+public class Bow : MonoBehaviour, IWeapon
 {
+    [SerializeField] private WeaponInfo weaponInfo;
+    public WeaponInfo GetWeaponInfo()
+    {
+        return weaponInfo;
+    }
     public void Attack()
     {
-        Debug.Log("Staff");
-        ActiveWeapon.Instance.ToggleIsAttacking(false);
+        Debug.Log("Bow");
+       // ActiveWeapon.Instance.ToggleIsAttacking(false);
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
