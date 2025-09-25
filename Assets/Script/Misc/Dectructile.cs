@@ -5,7 +5,7 @@ public class Dectructile : MonoBehaviour
     [SerializeField] private Object destroyVFX;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<DamageSource>()) {
+        if (collision.gameObject.GetComponent<DamageSource>() || collision.gameObject.GetComponent<Projecttile>()) {
             Instantiate(destroyVFX, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
