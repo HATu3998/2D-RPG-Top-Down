@@ -27,7 +27,7 @@ public class Projecttile : MonoBehaviour
         EnemyHealth enemyHealth = other.gameObject.GetComponent<EnemyHealth>();
         Indestructible indestructible = other.gameObject.GetComponent<Indestructible>();
         if(!other.isTrigger &&( enemyHealth || indestructible)){
-            enemyHealth?.TakeDamage(weaponInfos.weaponDamage);
+        // enemyHealth?.TakeDamage(weaponInfos.weaponDamage);
             Instantiate(particleOnHitPrefabVFX, transform.position, transform.rotation);
             Destroy(gameObject);
         }
