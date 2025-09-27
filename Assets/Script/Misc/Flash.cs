@@ -22,7 +22,17 @@ public class Flash : MonoBehaviour
         spriteRenderer.material = whiteFlashMat;
         yield return new WaitForSeconds(restoreDefaultMatTime);
         spriteRenderer.material = defaultMat;
-        enemyHeath.DetectDeath();
+        if (spriteRenderer != null)
+            spriteRenderer.material = defaultMat;
+
+        if (enemyHeath != null)
+        {
+            enemyHeath.DetectDeath();
+        }
+        else
+        {
+            Debug.LogWarning("EnemyHealth b? null khi g?i FlashRoutine tr?n " + gameObject.name);
+        }
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

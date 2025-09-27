@@ -6,7 +6,7 @@ public class Staff : MonoBehaviour, IWeapon
     [SerializeField] private GameObject magicLaser;
     [SerializeField] private Transform magicLaserSpawnPoint;
     private Animator myAnimator;
-    readonly int AttackHash = Animator.StringToHash("Attack");
+    readonly int ATTACK_HASH = Animator.StringToHash("Attack");
     private void Awake()
     {
         myAnimator = GetComponent<Animator>(); 
@@ -15,7 +15,7 @@ public class Staff : MonoBehaviour, IWeapon
     {
 
         //  ActiveWeapon.Instance.ToggleIsAttacking(false);
-        myAnimator.SetTrigger(AttackHash);
+        myAnimator.SetTrigger(ATTACK_HASH);
     }
     public void SpawnStaffProjectileAnimEvent()
     {

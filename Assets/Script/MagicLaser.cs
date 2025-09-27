@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MagicLaser : MonoBehaviour
 {
+    private bool isGrowing = true;
     [SerializeField] private float laserGrowTime = 2f;
     private float laserRange;
     private SpriteRenderer spriteRenderer;
@@ -14,7 +15,13 @@ public class MagicLaser : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
     }
-    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.gameObject.GetComponent<Indestructible>() && !other.isTrigger)
+        {
+            isGrowing = false;
+        }
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -28,7 +35,7 @@ public class MagicLaser : MonoBehaviour
     private IEnumerator IncreaseLaserLengthRoutine()
     {
         float timePassed = 0f;
-        while(spriteRenderer.size.x < laserRange)
+        while(spriteRenderer.size.x < laserRange && isGrowing )
         {
             timePassed += Time.deltaTime;
             float linearT = timePassed / laserGrowTime;

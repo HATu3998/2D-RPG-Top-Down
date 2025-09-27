@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 2332351936290438849}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -467,7 +467,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59fd29e142f2bdb458bd56036d6ac73c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damgeAmount: 1
 --- !u!1 &8035457002246465361
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,6 +544,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 123c4c2b8532b8147833f918dc34eb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponInfo: {fileID: 0}
+  magicLaser: {fileID: 0}
+  magicLaserSpawnPoint: {fileID: 0}
 --- !u!212 &5581586210417489842
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -68,7 +68,7 @@ public class ActiveWeapon : SingleTon<ActiveWeapon>
     }
     private void Attack()
     {
-        if (attackButtonDown && !isAttacking)
+        if (attackButtonDown && !isAttacking && CurrentActiveWeapon)
         {
             //   isAttacking = true;
             AttackCooldown();
