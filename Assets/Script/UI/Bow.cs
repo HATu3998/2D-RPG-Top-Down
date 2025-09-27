@@ -20,11 +20,12 @@ public class Bow : MonoBehaviour, IWeapon
     {
         myAnimator.SetTrigger(FIRE_HASH);
         GameObject newArrow = Instantiate(arrowPrefabs, arrowSpawnPoint.position, ActiveWeapon.Instance.transform.rotation);
-        Projecttile proj = newArrow.GetComponent<Projecttile>();
-        if (proj != null)
-        {
-            proj.UpdateWeaponInfo(weaponInfo);
-        }
+        newArrow.GetComponent<Projecttile>().UpdateProjectileRange(weaponInfo.weaponRange);
+        //Projecttile proj = newArrow.GetComponent<Projecttile>();
+        //if (proj != null)
+        //{
+        //    proj.UpdateWeaponInfo(weaponInfo);
+        //}
         // ActiveWeapon.Instance.ToggleIsAttacking(false);
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
