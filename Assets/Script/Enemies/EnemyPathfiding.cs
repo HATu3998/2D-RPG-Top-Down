@@ -36,6 +36,10 @@ public class EnemyPathfiding : MonoBehaviour
     {
         moveDir = targetPosition;
     }
+    public void StopMoving()
+    {
+        moveDir = Vector2.zero;
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

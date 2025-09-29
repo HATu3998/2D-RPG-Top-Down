@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1702506548385078930}
   - component: {fileID: 7307555395740961566}
   - component: {fileID: 4663328127963733747}
+  - component: {fileID: 8885384676307480133}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -104,3 +105,39 @@ MonoBehaviour:
   particleOnHitPrefabVFX: {fileID: 6938004613957992243, guid: dec32d5e767ccfa4eb2b5c8ee5a5a669, type: 3}
   isEnemyProjectile: 1
   projectileRange: 10
+--- !u!58 &8885384676307480133
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6334835912811638534}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: -0.000000014901161}
+  m_Radius: 0.18891166

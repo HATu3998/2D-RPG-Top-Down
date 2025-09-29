@@ -1,44 +1,99 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemyAi : MonoBehaviour
+public class EnemyAi : MonoBehaviour 
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        Coroutine coroutine = StartCoroutine(RoamingRouting());
-    }
+    [SerializeField] private float roamChangeDirFloat = 2f;
+    [SerializeField] private float attackRange = 5f;
+    [SerializeField] private MonoBehaviour enemyType;
+    [SerializeField] private float attackCooldown = 2f;
+    [SerializeField] private bool stopMovingWhileAttacking = false;
 
+    private bool canAttack = true;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+ 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  
     private enum State
     {
-        Roaming
+        Roaming,Attacking
     }
+    private Vector2 roamPosition;
+    private float timeRoaming = 0f;
+
     private State state;
     private EnemyPathfiding enemyPathFinding;
+
+    void Start()
+    {
+        roamPosition = GetRoamingPosition();
+    }
+    void Update()
+    {
+        MovementStateControl();
+    }
+    private void MovementStateControl()
+    {
+        switch (state)
+        {
+            default:
+            case State.Roaming:
+                Roaming();
+                break;
+            case State.Attacking:
+               Attacking();
+                break;
+        }
+    }
+    private void Roaming()
+    {
+        timeRoaming += Time.deltaTime;
+        enemyPathFinding.MoveTo(roamPosition);
+        if (Vector2.Distance(transform.position, PlayerController.Instance.transform.position) < attackRange)
+        { state = State.Attacking; }
+        if(timeRoaming > roamChangeDirFloat)
+        {
+            roamPosition = GetRoamingPosition();
+        }
+    }
     private void Awake()
     {
 
         enemyPathFinding = GetComponent<EnemyPathfiding>();
         state = State.Roaming;
     }
-    private IEnumerator RoamingRouting()
+public  void Attacking()
     {
-        while(state== State.Roaming)
+        if (Vector2.Distance(transform.position,PlayerController.Instance.transform.position)> attackRange) {
+            state = State.Roaming;
+        
+        }
+        if(attackRange != 0 && canAttack)
         {
-            Vector2 roamPosition = GetRoamingPosition();
-            enemyPathFinding.MoveTo(roamPosition);
-            yield return new WaitForSeconds(2f);
+            canAttack = false;
+            (enemyType as IEnemy).Attack();
+            if (stopMovingWhileAttacking)
+            {
+                enemyPathFinding.StopMoving();
+            }
+            else
+            {
+                enemyPathFinding.MoveTo(roamPosition);
+            }
+            StartCoroutine(AttackCooldownRoutine()); 
         }
          
     }
+    private IEnumerator AttackCooldownRoutine()
+    {
+        yield return new WaitForSeconds(attackCooldown);
+        canAttack = true;
+    }
     private Vector2 GetRoamingPosition()
     {
+        timeRoaming = 0f;  
         return new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
     }
     
 }
+  

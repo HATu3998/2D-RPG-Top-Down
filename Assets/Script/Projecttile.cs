@@ -28,15 +28,18 @@ public class Projecttile : MonoBehaviour
         EnemyHealth enemyHealth = other.gameObject.GetComponent<EnemyHealth>();
         Indestructible indestructible = other.gameObject.GetComponent<Indestructible>();
         PlayerHeath player  = other.gameObject.GetComponent<PlayerHeath>();
-        if(other.isTrigger && ( enemyHealth || indestructible || player)){
-            if(player && isEnemyProjectile)
+        if(!other.isTrigger && ( enemyHealth || indestructible || player)){
+            if( (player && isEnemyProjectile)|| (enemyHealth && !isEnemyProjectile))
             {
-                player.TakeDamage(1, transform);
+                player?.TakeDamage(1, transform);
+                Instantiate(particleOnHitPrefabVFX, transform.position, transform.rotation);
+                Destroy(gameObject);
+            }else if(!other.isTrigger && indestructible)
+            {
+                Instantiate(particleOnHitPrefabVFX, transform.position, transform.rotation);
+                Destroy(gameObject);
             }
-        
-        // enemyHealth?.TakeDamage(weaponInfos.weaponDamage);
-            Instantiate(particleOnHitPrefabVFX, transform.position, transform.rotation);
-            Destroy(gameObject);
+ 
         }
     }
     private void DetectFireDistance()
