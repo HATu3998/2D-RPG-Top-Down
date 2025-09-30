@@ -22,6 +22,10 @@ public class Projecttile : MonoBehaviour
     {
         this.projectileRange = projectileRange;
     }
+    public void UpdateMoveSpeed(float moveSpeed)
+    {
+        this.moveSpeed = moveSpeed;
+    }
  
     private void OnTriggerEnter2D(Collider2D other)
     {

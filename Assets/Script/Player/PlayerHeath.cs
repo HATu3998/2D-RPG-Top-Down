@@ -10,10 +10,12 @@ public class PlayerHeath : MonoBehaviour
     private bool canTakeDamage = true;
     private KnockBack knockback;
     private Flash flash;
+ 
     private void Awake()
     {
         flash = GetComponent<Flash>();
         knockback = GetComponent<KnockBack>();
+        
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -32,6 +34,9 @@ public class PlayerHeath : MonoBehaviour
  public  void TakeDamage(int damageAmount, Transform hitTransform)
     {
         if (!canTakeDamage) { return; }
+         
+        ScreenShakeManager.Instance.ShakeScreen();
+
         knockback.GetKnockBack(hitTransform, knockBackThrustAmount);
         StartCoroutine(flash.FlashRoutine());
 
