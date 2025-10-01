@@ -6,6 +6,7 @@ public class Dectructile : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<DamageSource>() || collision.gameObject.GetComponent<Projecttile>()) {
+            GetComponent<PickupSpawner>().DropItems();
             Instantiate(destroyVFX, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }

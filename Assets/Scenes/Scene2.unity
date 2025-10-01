@@ -1523,13 +1523,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: ghost
       objectReference: {fileID: 0}
-    - target: {fileID: 7577471388859457069, guid: 5f02448b10f20cf4684ee9cd0e38987e, type: 3}
-      propertyPath: angleSpread
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 7577471388859457069, guid: 5f02448b10f20cf4684ee9cd0e38987e, type: 3}
-      propertyPath: projecttilesPerBurst
-      value: 6
+    - target: {fileID: 966141376423044115, guid: 5f02448b10f20cf4684ee9cd0e38987e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9168900517162235672, guid: 5f02448b10f20cf4684ee9cd0e38987e, type: 3}
       propertyPath: m_LocalPosition.x
