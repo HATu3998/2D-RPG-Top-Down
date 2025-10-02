@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerHeath : MonoBehaviour
+public class PlayerHeath : SingleTon<PlayerHeath>
 {
     [SerializeField] private int maxHealth = 3;
     [SerializeField] private float knockBackThrustAmount = 10f;
@@ -10,14 +10,19 @@ public class PlayerHeath : MonoBehaviour
     private bool canTakeDamage = true;
     private KnockBack knockback;
     private Flash flash;
- 
-    private void Awake()
+
+    protected override void Awake()
     {
+        base.Awake();
+   
         flash = GetComponent<Flash>();
         knockback = GetComponent<KnockBack>();
         
     }
-
+    public void HealPlayer()
+    {
+        currentHealth += 1; 
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
