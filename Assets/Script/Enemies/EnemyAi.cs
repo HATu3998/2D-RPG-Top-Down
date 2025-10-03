@@ -71,7 +71,12 @@ public  void Attacking()
         if(attackRange != 0 && canAttack)
         {
             canAttack = false;
-            (enemyType as IEnemy).Attack();
+            if (enemyType is IEnemy enemy)
+                { (enemyType as IEnemy).Attack(); }
+            else
+            {
+                Debug.LogWarning($"{name} kh?ng c? EnemyType ?? Attack!");
+            }
             if (stopMovingWhileAttacking)
             {
                 enemyPathFinding.StopMoving();
