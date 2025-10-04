@@ -11,7 +11,9 @@ public class ActiveWeapon : SingleTon<ActiveWeapon>
     protected override void Awake()
     {
         base.Awake();
-        playController = new PlayController();
+
+        if (playController == null)
+        { playController = new PlayController(); }
     }
     private void OnEnable()
     {
