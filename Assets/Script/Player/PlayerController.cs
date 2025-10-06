@@ -50,8 +50,9 @@ public class PlayerController : SingleTon<PlayerController>
     }
     private void Dash()
     {
-        if (!isDashing)
+        if (!isDashing && Stanima.Instance.CurrentStanima >0)
         {
+            Stanima.Instance.UseStamina();
             isDashing = true;
             moveSpeed *= dashSpeed;
             myTrailRenderer.emitting = true;

@@ -1797,7 +1797,7 @@ GameObject:
   - component: {fileID: 821080833}
   - component: {fileID: 821080834}
   m_Layer: 5
-  m_Name: Heart Slider
+  m_Name: Health Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11725,7 +11725,7 @@ GameObject:
   - component: {fileID: 1688465385}
   - component: {fileID: 1688465386}
   m_Layer: 5
-  m_Name: Stanima Container
+  m_Name: Stamina Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32108,11 +32108,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8806244114558826579, guid: 016c09512f59ed843b06c648d442fe09, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 16.13
       objectReference: {fileID: 0}
     - target: {fileID: 8806244114558826579, guid: 016c09512f59ed843b06c648d442fe09, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: 8806244114558826579, guid: 016c09512f59ed843b06c648d442fe09, type: 3}
       propertyPath: m_LocalPosition.z
@@ -32222,11 +32222,11 @@ PrefabInstance:
       objectReference: {fileID: 1976186942}
     - target: {fileID: 2013052039086774914, guid: 67e62f72b1dcabb48bbce13342625fea, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 4.81647
       objectReference: {fileID: 0}
     - target: {fileID: 2013052039086774914, guid: 67e62f72b1dcabb48bbce13342625fea, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.18000364
       objectReference: {fileID: 0}
     - target: {fileID: 3531557224965285291, guid: 67e62f72b1dcabb48bbce13342625fea, type: 3}
       propertyPath: m_LocalPosition.x
@@ -32267,6 +32267,14 @@ PrefabInstance:
     - target: {fileID: 3531557224965285291, guid: 67e62f72b1dcabb48bbce13342625fea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7472330621706660507, guid: 67e62f72b1dcabb48bbce13342625fea, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 16.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7472330621706660507, guid: 67e62f72b1dcabb48bbce13342625fea, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: 8620249217447297096, guid: 67e62f72b1dcabb48bbce13342625fea, type: 3}
       propertyPath: m_Name
