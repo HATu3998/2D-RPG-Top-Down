@@ -47,6 +47,8 @@ public class PlayerController : SingleTon<PlayerController>
     private void Start()
     {
         playerControl.Combat.Dash.performed += _ => Dash();
+
+        ActiveInventory.Instance.EquipStartingWeapon();
     }
     private void Dash()
     {
@@ -121,7 +123,7 @@ public class PlayerController : SingleTon<PlayerController>
     }
     private void Move()
     {
-        if (knockBack.gettingKnockBack) { return; }
+        if (knockBack.gettingKnockBack || PlayerHeath.Instance.isDead) { return; }
         rb.MovePosition(rb.position + movement * (moveSpeed * Time.deltaTime));
     }
     private void AdjustPlayerFacingDirection()

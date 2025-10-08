@@ -1,11 +1,12 @@
 using UnityEngine;
 
-public class ActiveInventory : MonoBehaviour
+public class ActiveInventory : SingleTon<ActiveInventory>
 {
     private int activeSlotIndexNum = 0;
     private PlayController playController;
-    private void Awake()
+  protected override void Awake()
     {
+        base.Awake();
         playController = PlayerController.playerControl;
 
     }
@@ -21,13 +22,18 @@ public class ActiveInventory : MonoBehaviour
             }
         }
         playController.Inventory.KeyBoard.performed += ctx => ToggleActiveSlot((int)ctx.ReadValue<float>());
-        ToggleActiveHightight(0);
+       // ToggleActiveHightight(0);
 
     }
     private void Update()
     {
         if (playController != null && !playController.asset.enabled)
             Debug.LogWarning("Player input system is currently DISABLED!");
+    }
+
+    public void EquipStartingWeapon()
+    {
+        ToggleActiveHightight(0);
     }
     private void OnEnable()
     {
@@ -134,9 +140,13 @@ public class ActiveInventory : MonoBehaviour
         }
 
         GameObject weaponToSpawn = weaponInfo.weaponPrefab;
-        GameObject newWeapon = Instantiate(weaponToSpawn, ActiveWeapon.Instance.transform.position, Quaternion.identity);
-        ActiveWeapon.Instance.transform.rotation = Quaternion.Euler(0, 0, 0);
-        newWeapon.transform.parent = ActiveWeapon.Instance.transform;
+
+
+        //    GameObject newWeapon = Instantiate(weaponToSpawn, ActiveWeapon.Instance.transform.position, Quaternion.identity);
+
+        GameObject newWeapon = Instantiate(weaponToSpawn, ActiveWeapon.Instance.transform); 
+      //  ActiveWeapon.Instance.transform.rotation = Quaternion.Euler(0, 0, 0);
+     //   newWeapon.transform.parent = ActiveWeapon.Instance.transform;
         ActiveWeapon.Instance.NewWeapon(newWeapon.GetComponent<MonoBehaviour>());
 
     }

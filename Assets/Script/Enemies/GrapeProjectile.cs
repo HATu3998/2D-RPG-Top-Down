@@ -7,6 +7,7 @@ public class GrapeProjectile : MonoBehaviour
     [SerializeField] private AnimationCurve animCurve;
     [SerializeField] private float heightY = 3f;
     [SerializeField] private GameObject grapeProjectileShadow;
+    [SerializeField] private GameObject splatterPrefabs;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -32,6 +33,7 @@ public class GrapeProjectile : MonoBehaviour
             transform.position = Vector2.Lerp(startPosition, endPosition, linearT) + new Vector2(0f, height);
             yield return null;
         }
+        Instantiate(splatterPrefabs, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
     private IEnumerator MoveGrapeShadowRoutine(GameObject grapeShadow,Vector3 startPosition,Vector3 endPosition)
